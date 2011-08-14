@@ -142,10 +142,12 @@ class WmsStore(ResourceInfo):
     enabled = xml_property("enabled", lambda x: x.text == "true")
     name = xml_property("name")
     capabilitiesURL = xml_property("capabilitiesURL")
+    type = xml_property("type")
 
     writers = dict(enabled = write_bool("enabled"),
                    name = write_string("name"),
-                   capabilitiesURL = write_string("capabilitiesURL"))
+                   capabilitiesURL = write_string("capabilitiesURL"),
+                   type = write_string("type"))
 
 
     def get_resources(self):
@@ -166,7 +168,7 @@ class UnsavedWmsStore(WmsStore):
     def __init__(self, catalog, name, workspace):
         super(UnsavedWmsStore, self).__init__(catalog, workspace, name)
         self.dirty.update(dict(
-            name=name, enabled=True, capabilitiesURL=""))
+            name=name, enabled=True, capabilitiesURL=""), type="WMS")
 
     @property
     def href(self):

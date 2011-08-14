@@ -183,7 +183,7 @@ class ModifyingTests(unittest.TestCase):
 
   def testCoverageStoreCreate(self):
     ds = self.cat.create_coveragestore2("coverage_gsconfig")
-    ds.data_url = "file:data/mytiff.tiff"
+    ds.url = "file:data/mytiff.tiff"
     self.cat.save(ds)
 
   def testCoverageStoreModify(self):
@@ -198,6 +198,12 @@ class ModifyingTests(unittest.TestCase):
     # for other tests if this layer is misconfigured
     cs.type = "GeoTIFF"
     self.cat.save(cs) 
+
+  def testWmsStoreCreate(self):
+    ws = self.cat.create_wmsstore("wmsstore_gsconfig")
+    ws.capabilitiesURL = "http://gis.ktimanet.gr/wms/wmsopen/wmsserver.aspx"
+    ws.type = "WMS"
+    self.cat.save(ws)
 
   def testCoverageSave(self):
     # test saving round trip

@@ -1,7 +1,7 @@
 from datetime import datetime, timedelta
 import logging
 from geoserver.layer import Layer
-from geoserver.store import coveragestore_from_index, datastore_from_index, wmsstore_from_index \
+from geoserver.store import coveragestore_from_index, datastore_from_index, wmsstore_from_index, \
     DataStore, CoverageStore, UnsavedDataStore, UnsavedCoverageStore, WmsStore, UnsavedWmsStore
 from geoserver.style import Style
 from geoserver.support import prepare_upload_bundle
@@ -200,6 +200,11 @@ class Catalog(object):
       if workspace is None:
           workspace = self.get_default_workspace()
       return UnsavedCoverageStore(self, name, workspace)
+  
+  def create_wmsstore(self, name, workspace = None):
+      if workspace is None:
+          workspace = self.get_default_workspace()
+      return UnsavedWmsStore(self, name, workspace)
 
   def add_data_to_store(self, store, name, data, overwrite = False, charset = None):
       if isinstance(data, dict):
