@@ -191,7 +191,7 @@ class WmsLayer(ResourceInfo):
     save_method = "PUT"
 
     def __init__(self, catalog, workspace, store, name):
-        super(FeatureType, self).__init__()
+        super(WmsLayer, self).__init__()
   
         assert isinstance(store, ResourceInfo)
         assert isinstance(name, basestring)
