@@ -205,7 +205,7 @@ class ModifyingTests(unittest.TestCase):
     ws.type = "WMS"
     self.cat.save(ws)
     
-  def testWmsStores(self):
+  def testWmsLayer(self):
     self.cat.create_workspace("testwms", "http://example.com/wms")
     testwms = self.cat.get_workspace("testwms")
     ws = self.cat.create_wmsstore("wmsstore",testwms)
@@ -216,10 +216,12 @@ class ModifyingTests(unittest.TestCase):
     ws=self.cat.get_stores(testwms)[0]
     self.assertEqual("http://localhost:8080/geoserver/rest/workspaces/testwms/wmsstores/wmsstore.xml",ws.href)
     self.assertEqual(0, len(ws.get_resources()))
-    #No resources added-published yet (layers) , automatically publish all available layers?
-#    self.assertEqual(1, len(ws.get_resources()))
-#    self.assertEqual("http://localhost:8080/geoserver/rest/workspaces/testwms/wmsstores/wmsstore/wmslayers/KTBASEMAP.xml",
-#                     ws.get_resources()[0].href)
+    # No resources added-published yet (layers)
+    # GeoServer REST API does not support publishing layers yet
+    # http://projects.opengeo.org/suite/wiki/upload
+    #self.assertEqual(1, len(ws.get_resources()))
+    #self.assertEqual("http://localhost:8080/geoserver/rest/workspaces/testwms/wmsstores/wmsstore/wmslayers/KTBASEMAP.xml",
+    #                  ws.get_resources()[0].href)
 
   def testCoverageSave(self):
     # test saving round trip
